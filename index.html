@@ -18,9 +18,6 @@
             <nav id="nav">
                 <ul>
                     <li><a href="#home" onclick="select()">INICIO</a></li>
-                    <li><a href="#about-me" onclick="select()">SOBRE MÍ</a></li>
-                    <li><a href="#skills" onclick="select()">HABILIDADES</a></li>
-                    <li><a href="#curriculum" onclick="select()">CURRICULUM</a></li>
                     <li><a href="#portfolio" onclick="select()">PORTAFOLIO</a></li>
                 </ul>
             </nav>
@@ -38,188 +35,27 @@
             </div>
             <h1>MIGUEL ARMAS</h1>
             <h2>Desarrollador backend</h2>
+            <button id="downloadBtn">
+                Descargar CV <i class="fa-solid fa-download"></i>
+                <span class="overlay"></span>
+            </button>
 
             <div class="networks">
                 <a href="https://www.linkedin.com/in/miguel-armas-abt/"><i class="fa-brands fa-linkedin-in"></i></a>
                 <a href="https://github.com/miguel-armas-abt/"><i class="fab fa-github"></i></a>
             </div>
         </div>
-    </section>
-
-    <!-- ABOUT ME -->
-    <section id="about-me" class="about-me">
-        <div class="content-section">
-            <h2>Sobre mí</h2>
-            <p>Desarrollador de software con conocimientos sólidos en programación backend con APIs, autogestionado y dispuesto a afrontar nuevos retos y aprender nuevas tecnologías; siempre alineado con los objetivos del negocio y con la responsabilidad de plasmar las soluciones en un código limpio.</p>
-        </div>
-    </section>
-
-    <!-- SKILLS -->
-    <section class="skills" id="skills">
-        <div class="content-section">
-            <h2>Habilidades</h2>
-            <div class="fila">
-                <div class="col">
-                    <h3>Spring Boot</h3>
-                    <div class="skill-custom-container">
-                        <span>Spring Cloud, Spring Data</span>
-                    </div>
-                    <div class="skill-custom-container">
-                        <span><strong>Reactividad:</strong> WebFlux, RxJava2</span>
-                    </div>
-                    <div class="skill-custom-container">
-                        <span><strong>Cliente REST:</strong> Retrofit, WebClient</span>
-                    </div>
-                    <div class="skill-custom-container">
-                        <span>Lombok, Mapstruct, Swagger</span>
-                    </div>
-                    <div class="skill-custom-container">
-                        <span><strong>Testing:</strong> JUnit, Mockito</span>
-                    </div>
-                    <div class="skill-custom-container">
-                        <span><strong>Maven:</strong> Parent modules</span>
-                    </div>
-
-                </div>
-
-                <div class="col">
-                    <h3>Quarkus</h3>
-                    <div class="skill-custom-container">
-                        <span><strong>ORM:</strong> Hibernate Apanache</span>
-                    </div>
-                    <div class="skill-custom-container">
-                        <span><strong>Reactividad:</strong> Multiny</span>
-                    </div>
-                    <div class="skill-custom-container">
-                        <span>GraalVM</span>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <h3>GO</h3>
-                    <div class="skill-custom-container">
-                        <span><strong>ORM:</strong> Gorm</span>
-                    </div>
-                    <div class="skill-custom-container">
-                        <span><strong>REST:</strong> Gin</span>
-                    </div>
-                    <div class="skill-custom-container">
-                        <span>Mapstructure</span>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="fila">
-                <div class="col">
-                    <h3>Integración</h3>
-                    <div class="skill-custom-container">
-                        <span><strong>BD:</strong> MySQL, PostgreSQL, Oracle</span>
-                    </div>
-                    <div class="skill-custom-container">
-                        <span><strong>Caché:</strong> Redis, Hazelcast</span>
-                    </div>
-                    <div class="skill-custom-container">
-                        <span><strong>Message broker:</strong> Apache Kafka</span>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <h3>Buenas prácticas</h3>
-                    <div class="skill-custom-container">
-                        <span>Clean architecture</span>
-                    </div>
-                    <div class="skill-custom-container">
-                        <span>Domain Driven Design</span>
-                    </div>
-                    <div class="skill-custom-container">
-                        <span>SOLID</span>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <h3>CI/CD</h3>
-                    <div class="skill-custom-container">
-                        <span>Git SCM</span>
-                    </div>
-                    <div class="skill-custom-container">
-                        <span>Docker</span>
-                    </div>
-                    <div class="skill-custom-container">
-                        <span>Kubernetes</span>
-                    </div>
-                    <div class="skill-custom-container">
-                        <span>Jenkins, Azure DevOps</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECCION CURRICULUM -->
-    <section id="curriculum" class="curriculum">
-        <div class="content-section">
-            <h2>Curriculum</h2>
-            <div class="fila">
-                <div class="col izquierda">
-                    <h3>Educación</h3>
-                    <div class="item izq">
-                        <h4>Ingeniería de Sistemas</h4>
-                        <span class="casa">Universidad Nacional Mayor de San Marcos</span>
-                        <div class="conectori">
-                            <div class="circuloi"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col derecha">
-                    <h3>Experiencia de trabajo</h3>
-                    <div class="item der">
-                        <h4>Desarrollador Backend Senior</h4>
-                        <span class="casa">Indra</span>
-                        <span class="fecha">marzo 2023 - actualidad</span>
-                        <p>Cliente Interbank</p>
-                        <div class="conectord">
-                            <div class="circulod"></div>
-                        </div>
-                    </div>
-                    <div class="item der">
-                        <h4>Desarrollador Backend Middle</h4>
-                        <span class="casa">Tata Consultancy Services</span>
-                        <span class="fecha">mayo 2022 - febrero 2023</span>
-                        <p>Cliente BCP</p>
-                        <div class="conectord">
-                            <div class="circulod"></div>
-                        </div>
-                    </div>
-                    <div class="item der">
-                        <h4>Desarrollador Backend Middle</h4>
-                        <span class="casa">NTT DATA</span>
-                        <span class="fecha">noviembre 2020 - abril 2022</span>
-                        <p>Cliente BCP</p>
-                        <div class="conectord">
-                            <div class="circulod"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button id="downloadBtn">
-                Descargar CV <i class="fa-solid fa-download"></i>
-                <span class="overlay"></span>
-            </button>
-            <script>
-                document.getElementById('downloadBtn').addEventListener('click', function () {
-                    var pdfPath = '/resources/CV_ARMAS_ABT_MIGUEL.pdf';
-                    var link = document.createElement('a');
-                    link.href = pdfPath;
-                    link.download = 'CV_ARMAS_ABT_MIGUEL.pdf';
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                });
-            </script>
-        </div>
-
+        <script>
+            document.getElementById('downloadBtn').addEventListener('click', function () {
+                var pdfPath = '/resources/CV_ARMAS_ABT_MIGUEL.pdf';
+                var link = document.createElement('a');
+                link.href = pdfPath;
+                link.download = 'CV_ARMAS_ABT_MIGUEL.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+        </script>
     </section>
 
     <!-- SECCION PORTFOLIO -->
@@ -261,10 +97,6 @@
         <a href="#home" class="arriba">
             <i class="fa-solid fa-angles-up"></i>
         </a>
-        <div class="networks">
-            <a href="https://www.linkedin.com/in/miguel-armas-abt/"><i class="fa-brands fa-linkedin-in"></i></a>
-            <a href="https://github.com/miguel-armas-abt/"><i class="fab fa-github"></i></a>
-        </div>
     </footer>
 
     <script src="script.js"></script>
