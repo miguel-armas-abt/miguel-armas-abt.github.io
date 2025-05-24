@@ -1,3 +1,4 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,18 +13,18 @@
 <!-- Header -->
 <header class="py-3 px-4">
     <div class="d-flex justify-content-between align-items-center">
-        <div class="profile">
-            <a href="https://www.linkedin.com/in/miguel-armas-abt/" target="_blank">
-                <img src="img/hero.png" alt="Foto de Miguel">
+        <div class="profile d-flex align-items-center">
+            <a id="profileLink" href="#" target="_blank">
+                <img id="profilePhoto" src="" alt="Foto de perfil" width="48" height="48" class="rounded-circle me-2">
             </a>
-            <h2 class="h6 mb-0">Miguel Armas</h2>
+            <h2 id="profileName" class="h6 mb-0"></h2>
         </div>
         <div class="header-actions">
             <button id="themeToggle" class="btn btn-outline-secondary btn-sm">
                 <i class="fas fa-moon"></i>
             </button>
-            <a href="resources/CV_ARMAS_ABT_MIGUEL.pdf" class="btn btn-turquoise btn-sm" download>CV</a>
-            <a href="https://github.com/miguel-armas-abt" target="_blank" class="btn btn-github">
+            <a id="downloadCv" href="#" class="btn btn-turquoise btn-sm" download>CV</a>
+            <a id="githubLink" href="#" target="_blank" class="btn btn-github">
                 <i class="fab fa-github"></i>
             </a>
         </div>
@@ -33,12 +34,7 @@
 <main class="container my-4">
     <!-- Tabs + Search -->
     <div class="tabs-container mx-auto">
-        <ul class="nav" id="filterTabs" role="tablist">
-            <li class="nav-item"><button class="nav-link" data-filter="fundamentals">Fundamentos</button></li>
-            <li class="nav-item"><button class="nav-link" data-filter="software-design">Diseño de software</button></li>
-            <li class="nav-item"><button class="nav-link" data-filter="web-service">Servicios web</button></li>
-            <li class="nav-item"><button class="nav-link" data-filter="roadmap">Rutas de aprendizaje</button></li>
-        </ul>
+        <ul class="nav" id="filterTabs" role="tablist"></ul>
         <button class="search-btn" id="searchBtn"><i class="fas fa-search"></i></button>
         <input id="searchInput" class="search-input" placeholder="Buscar repositorio...">
     </div>

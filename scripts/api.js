@@ -1,12 +1,20 @@
+// scripts/api.js
 export const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 horas en ms
 
 /**
+ * Obtiene datos de perfil.
+ */
+export async function getProfile(apiBase, traceParent, channelId) {
+  const url = `${apiBase}/profiles/miguel-armas-abt`;
+  const res = await fetch(url, {
+    headers: { traceParent, channelId }
+  });
+  if (!res.ok) throw new Error(`Error fetching profile ${url}`);
+  return res.json();
+}
+
+/**
  * Obtiene repos por etiqueta, usando localStorage para cache con TTL.
- * @param {string} label
- * @param {string} apiBase
- * @param {string} traceParent
- * @param {string} channelId
- * @returns {Promise<Array>}
  */
 export async function getRepos(label, apiBase, traceParent, channelId) {
   const cacheKey = `repoCache_${label}`;
