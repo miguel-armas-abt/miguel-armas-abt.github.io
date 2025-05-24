@@ -1,80 +1,63 @@
-body {
-  background-color: #f7f7f7;
-  transition: background-color 0.3s, color 0.3s;
-}
-header {
-  background: #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: background 0.3s, box-shadow 0.3s;
-}
-.profile a img {
-  border-radius: 50%;
-  width: 48px; height: 48px;
-  object-fit: cover;
-  margin-right: 8px;
-}
-.profile h2 {
-  font-size: 1rem;
-  margin: 0;
-}
+/* Base */
+body { background-color: #f7f7f7; transition: background-color 0.3s, color 0.3s; }
+header { background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: background 0.3s, box-shadow 0.3s; }
+
+/* Profile */
+.profile { display: flex; align-items: center; }
+.profile a img { border-radius: 50%; width: 48px; height: 48px; object-fit: cover; margin-right: 8px; }
+.profile h2 { font-size: 1rem; margin: 0; }
+
+/* Header actions */
+.header-actions { display: flex; align-items: center; }
 .header-actions .btn { margin-left: 8px; }
-.btn-turquoise {
-  background-color: #007a87;
-  border: 1px solid #007a87;
-  color: #fff;
-}
+.btn-turquoise { background-color: #007a87; border: 1px solid #007a87; color: #fff; }
 .btn-github {
   width: 36px; height: 36px;
   padding: 0; border-radius: 50%;
-  display: inline-flex;
-  align-items: center; justify-content: center;
-  border: 1px solid #484848;
-  color: #484848;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid #484848; color: #484848;
 }
+
+/* Tabs container */
 .tabs-container {
-  background: #fff;
-  border-radius: 24px;
+  background: #fff; border-radius: 24px;
   display: flex; align-items: center;
-  padding: 8px 16px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  margin-bottom: 24px;
-  transition: background 0.3s, box-shadow 0.3s;
+  padding: 8px 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-bottom: 24px; transition: background 0.3s, box-shadow 0.3s;
 }
-.nav-link {
+.tabs-container .nav-link {
   background: transparent; border: none;
   color: #484848; margin: 0 12px;
   border-radius: 16px; padding: 8px 16px;
   font-weight: 500; cursor: pointer;
 }
-.nav-link.active {
+.tabs-container .nav-link.active {
   background-color: #007a87; color: #fff;
 }
+
+/* Search */
 .search-btn {
-  background: #007a87; border: none;
-  color: #fff; border-radius: 50%;
-  width: 36px; height: 36px;
-  display: flex; align-items: center;
-  justify-content: center; margin-left: auto;
-  cursor: pointer; transition: background 0.3s;
+  background: #007a87; border: none; color: #fff;
+  border-radius: 50%; width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  margin-left: auto; cursor: pointer; transition: background 0.3s;
 }
 .search-input {
   display: none; width: 200px;
-  border: 1px solid #ccc;
-  border-radius: 24px;
-  padding: 8px 16px;
-  margin-left: auto;
+  border: 1px solid #ccc; border-radius: 24px;
+  padding: 8px 16px; margin-left: auto;
 }
+
+/* Cards */
 .card-custom {
-  background: #fff; border: none;
-  border-radius: 12px; overflow: hidden;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-  margin-right: 1rem; cursor: pointer;
-  position: relative;
+  background: #fff; border: none; border-radius: 12px;
+  overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  margin-right: 1rem; cursor: pointer; position: relative;
   transition: background 0.3s, box-shadow 0.3s;
 }
-.card-img-top {
-  height: 140px; object-fit: cover; width: 100%;
-}
+.card-img-wrapper { position: relative; }
+.card-img-top { height: 140px; object-fit: cover; width: 100%; }
+
 .label-pill {
   position: absolute; top: 8px; left: 8px;
   background: rgba(0,0,0,0.6); color: #fff;
@@ -87,17 +70,21 @@ header {
   padding: 4px 8px; border-radius: 12px;
   font-size: 12px; display: flex; align-items: center;
 }
-/* Dark mode */
+
+/* Status messages */
+#loading, #error, #noData {
+  /* Estos los puedes personalizar aquí si lo requieres */
+}
+
+/* Dark Mode */
 body.dark-mode {
   background-color: #121212; color: #e0e0e0;
 }
 body.dark-mode header {
-  background: #1e1e1e;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  background: #1e1e1e; box-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 body.dark-mode .tabs-container {
-  background: #1e1e1e;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+  background: #1e1e1e; box-shadow: 0 2px 6px rgba(0,0,0,0.5);
 }
 body.dark-mode .nav-link { color: #e0e0e0; }
 body.dark-mode .nav-link.active {
@@ -105,18 +92,15 @@ body.dark-mode .nav-link.active {
 }
 body.dark-mode .search-btn { background: #005f63; }
 body.dark-mode .card-custom {
-  background: #1e1e1e;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  background: #1e1e1e; box-shadow: 0 1px 4px rgba(0,0,0,0.5);
 }
 body.dark-mode .card-body { color: #e0e0e0; }
-/* preservamos el pill igual en dark */
+/* preserva el pill */
 body.dark-mode .label-pill {
-  background: rgba(0,0,0,0.6)!important;
-  color: #fff!important;
+  background: rgba(0,0,0,0.6) !important; color: #fff !important;
 }
 body.dark-mode .watcher-pill {
-  background: rgba(255,255,255,0.2);
-  color: #e0e0e0;
+  background: rgba(255,255,255,0.2); color: #e0e0e0;
 }
 body.dark-mode .btn-turquoise {
   background-color: #004f55; border-color: #004f55;

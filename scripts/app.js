@@ -8,13 +8,8 @@ const apiBase    = 'http://localhost:8080/poc/repositories/v1';
 const traceParent = '00-682c6c8de346208bb942f4fee2469715-476d65446bbd4bfb-01';
 const channelId   = 'WEB';
 
-// Estado actual de repos cargados
 let currentRepos = [];
 
-/**
- * Carga y pinta repositorios para la etiqueta dada.
- * @param {string} label
- */
 async function loadAndRender(label) {
   clearCarousel();
   document.getElementById('loading').classList.remove('d-none');
