@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -33,10 +32,12 @@
 
   <main class="container my-4">
     <!-- Tabs + Search -->
-    <div class="tabs-container w-100">
-      <ul class="nav" id="filterTabs" role="tablist"></ul>
-      <button class="search-btn" id="searchBtn"><i class="fas fa-search"></i></button>
-      <input id="searchInput" class="search-input" placeholder="Buscar repositorio...">
+    <div class="tabs-container w-100 d-flex align-items-center">
+      <ul class="nav flex-grow-1" id="filterTabs" role="tablist"></ul>
+      <div class="search-wrapper">
+        <button class="search-btn" id="searchBtn"><i class="fas fa-search"></i></button>
+        <input id="searchInput" class="search-input" placeholder="Buscar repositorio...">
+      </div>
     </div>
 
     <!-- Estado -->
@@ -51,15 +52,11 @@
     <!-- Carrusel de repositorios -->
     <div id="repoCarousel" class="carousel slide position-relative" data-bs-ride="false">
       <div class="carousel-inner" id="carouselInner"></div>
-
-      <!-- Controles personalizados -->
-      <button class="carousel-control-prev custom-carousel-control"
-              type="button" data-bs-target="#repoCarousel" data-bs-slide="prev">
+      <button class="carousel-control-prev custom-carousel-control" type="button" data-bs-target="#repoCarousel" data-bs-slide="prev">
         <span class="visually-hidden">Anterior</span>
         <i class="fas fa-chevron-left"></i>
       </button>
-      <button class="carousel-control-next custom-carousel-control"
-              type="button" data-bs-target="#repoCarousel" data-bs-slide="next">
+      <button class="carousel-control-next custom-carousel-control" type="button" data-bs-target="#repoCarousel" data-bs-slide="next">
         <span class="visually-hidden">Siguiente</span>
         <i class="fas fa-chevron-right"></i>
       </button>

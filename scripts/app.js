@@ -1,8 +1,9 @@
-import { getProfile, getRepos } from './api.js';
-import { initThemeToggle }        from './themeToggle.js';
-import { initSearch }             from './search.js';
+// scripts/app.js
+import { getProfile, getRepos }    from './api.js';
+import { initThemeToggle }         from './themeToggle.js';
+import { initSearch }              from './search.js';
 import { clearCarousel, renderCarousel } from './carousel.js';
-import { initTabs }               from './tabs.js';
+import { initTabs }                from './tabs.js';
 
 const apiBase     = 'http://localhost:8080/poc/repositories/v1';
 const traceParent = '00-682c6c8de346208bb942f4fee2469715-476d65446bbd4bfb-01';
@@ -10,16 +11,13 @@ const channelId   = 'WEB';
 
 let currentRepos = [];
 
-/**
- * Carga perfil y construye header y pestañas.
- */
+/** Carga perfil, header y pestañas */
 async function loadProfileAndTabs() {
   try {
     const profile = await getProfile(apiBase, traceParent, channelId);
 
     document.getElementById('profileName').textContent = profile.fullName;
     document.getElementById('profilePhoto').src        = profile.photoUrl;
-
     document.getElementById('profileLink').href        = profile.linkedinUrl;
     document.getElementById('downloadCv').href         = profile.cvUrl;
     document.getElementById('githubLink').href         = profile.gitHubUrl;
@@ -42,10 +40,11 @@ async function loadProfileAndTabs() {
     return profile.repoFilters[0]?.key || '';
   } catch (err) {
     console.error('Error cargando perfil:', err);
-    return 'fundamentals';
+    return '';
   }
 }
 
+/** Obtiene y renderiza los repos para la etiqueta dada */
 async function loadAndRender(label) {
   clearCarousel();
   document.getElementById('loading').classList.remove('d-none');
@@ -60,17 +59,33 @@ async function loadAndRender(label) {
 }
 
 async function init() {
+  // 1) Perfil y tabs
   const defaultLabel = await loadProfileAndTabs();
+
+  // 2) Tema, pestañas y búsqueda
   initThemeToggle();
   initTabs(loadAndRender);
-  initSearch(term => {
-    const filtered = currentRepos.filter(r =>
-      r.name.toLowerCase().includes(term)
-    );
-    renderCarousel(filtered);
-  });
-  // Carga inicial con la primera pestaña
-  loadAndRender(defaultLabel);
+
+  initSearch(
+    // onSearch: limpia y renderiza sólo los que coincidan
+    term => {
+      clearCarousel();
+      const filtered = currentRepos.filter(r =>
+        r.name.toLowerCase().includes(term)
+      );
+      renderCarousel(filtered);
+    },
+    // onReset: limpia y vuelve a renderizar todo el slide actual
+    () => {
+      clearCarousel();
+      renderCarousel(currentRepos);
+    }
+  );
+
+  // 3) Carga inicial
+  if (defaultLabel) {
+    loadAndRender(defaultLabel);
+  }
 }
 
 document.addEventListener('DOMContentLoaded', init);
