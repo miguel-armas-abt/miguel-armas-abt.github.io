@@ -1,5 +1,55 @@
 import { getConfig } from '../commons/config/properties.js';
 
+function createCard(repo) {
+  const card = document.createElement('div');
+  card.className = 'card card-custom d-flex flex-column';
+  card.onclick = () => window.open(repo.url, '_blank');
+
+  const imgWrapper = document.createElement('div');
+  imgWrapper.className = 'card-img-wrapper position-relative';
+
+  const spinner = document.createElement('div');
+  spinner.className = 'spinner-border text-turquoise position-absolute top-50 start-50 translate-middle';
+  spinner.setAttribute('role', 'status');
+  spinner.innerHTML = `<span class="visually-hidden">Cargando imagen…</span>`;
+  imgWrapper.appendChild(spinner);
+
+  const img = document.createElement('img');
+  img.className = 'card-img-top d-none';
+  img.alt = repo.name;
+  img.src = repo.imageUrl;
+  // img.loading  = 'lazy';
+  img.decoding = 'async';
+  img.onload = () => {
+    spinner.remove();
+    img.classList.remove('d-none');
+  };
+  imgWrapper.appendChild(img);
+
+  const label = document.createElement('div');
+  label.className = 'label-pill';
+  label.setAttribute('data-bs-toggle', 'tooltip');
+  label.setAttribute('data-bs-trigger', 'hover focus');
+  label.setAttribute('data-bs-placement', 'top');
+  label.setAttribute('data-bs-container', 'body');
+  label.title = `Último push: ${repo.pushedAt}`;
+  label.textContent = repo.name;
+  imgWrapper.appendChild(label);
+
+  const watcher = document.createElement('div');
+  watcher.className = 'watcher-pill';
+  watcher.innerHTML = `<i class="fas fa-eye me-1"></i><span>${repo.watchersCount}</span>`;
+  imgWrapper.appendChild(watcher);
+
+  const body = document.createElement('div');
+  body.className = 'card-body';
+  body.innerHTML = `<p class="card-text mb-2">${repo.description}</p>`;
+
+  card.appendChild(imgWrapper);
+  card.appendChild(body);
+  return card;
+}
+
 export function clearCarousel() {
   const container = document.getElementById('carouselInner');
   container.innerHTML = '';
@@ -9,6 +59,7 @@ export function clearCarousel() {
 
 export function renderCarousel(repos) {
   const container = document.getElementById('carouselInner');
+  clearCarousel();
 
   if (repos.length === 0) {
     document.getElementById('noData').classList.remove('d-none');
@@ -16,45 +67,29 @@ export function renderCarousel(repos) {
   }
 
   const { carouselSize } = getConfig();
+  const isMobile = window.matchMedia('(max-width: 767.98px)').matches;
 
-  repos.forEach((repo, i) => {
-    const slideIndex = Math.floor(i / carouselSize);
-    let slide = container.children[slideIndex];
-    if (!slide) {
-      slide = document.createElement('div');
-      slide.className = 'carousel-item' + (slideIndex === 0 ? ' active' : '');
-      const row = document.createElement('div');
-      row.className = 'd-flex';
-      slide.appendChild(row);
-      container.appendChild(slide);
-    }
+  if (isMobile) {
+    repos.forEach(repo => {
+      container.appendChild(createCard(repo));
+    });
+  } else {
+    repos.forEach((repo, i) => {
+      const slideIndex = Math.floor(i / carouselSize);
+      let slide = container.children[slideIndex];
+      if (!slide) {
+        slide = document.createElement('div');
+        slide.className = 'carousel-item' + (slideIndex === 0 ? ' active' : '');
+        const row = document.createElement('div');
+        row.className = 'd-flex';
+        slide.appendChild(row);
+        container.appendChild(slide);
+      }
+      slide.querySelector('.d-flex').appendChild(createCard(repo));
+    });
+  }
 
-    const card = document.createElement('div');
-    card.className = 'card card-custom d-flex flex-column';
-    card.onclick = () => window.open(repo.url, '_blank');
-    card.innerHTML = `
-      <div class="card-img-wrapper">
-        <img src="${repo.imageUrl}" class="card-img-top" alt="${repo.name}">
-        <div class="label-pill"
-             data-bs-toggle="tooltip"
-             data-bs-trigger="hover focus"
-             data-bs-placement="top"
-             data-bs-container="body"
-             title="Último push: ${repo.pushedAt}">
-          ${repo.name}
-        </div>
-        <div class="watcher-pill">
-          <i class="fas fa-eye me-1"></i><span>${repo.watchersCount}</span>
-        </div>
-      </div>
-      <div class="card-body">
-        <p class="card-text mb-2">${repo.description}</p>
-      </div>
-    `;
-
-    slide.firstChild.appendChild(card);
-  });
-
-  const triggers = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-  triggers.forEach(el => new bootstrap.Tooltip(el));
+  document
+    .querySelectorAll('[data-bs-toggle="tooltip"]')
+    .forEach(el => new bootstrap.Tooltip(el));
 }

@@ -1,9 +1,9 @@
-import { loadConfig }       from './commons/config/properties.js';
+import { loadConfig }          from './commons/config/properties.js';
 import { getProfile, getRepos } from './repository/repos_repository.js';
-import { initThemeToggle }  from './view/themeToggle.js';
-import { initSearch }       from './view/search.js';
+import { initThemeToggle }     from './view/themeToggle.js';
+import { initSearch }          from './view/search.js';
 import { clearCarousel, renderCarousel } from './view/carousel.js';
-import { initTabs }         from './view/tabs.js';
+import { initTabs }            from './view/tabs.js';
 import { generateTraceParent } from './commons/tracing/tracing.js';
 
 let currentRepos = [];
@@ -33,6 +33,7 @@ async function loadProfileAndTabs() {
       tabsContainer.appendChild(li);
     });
 
+  // Return the *first* filter key so we have a fallback.
   return profile.repoFilters[0]?.key || '';
 }
 
@@ -51,10 +52,19 @@ async function loadAndRender(label) {
 }
 
 async function init() {
+  // Show global loader & disable search until ready
+  const loader       = document.getElementById('globalLoader');
+  const searchBtn    = document.getElementById('searchBtn');
+  const searchInput  = document.getElementById('searchInput');
+  loader.classList.remove('d-none');
+  searchBtn.disabled   = true;
+  searchInput.disabled = true;
+
+  // 1. Load config + profile (and build tabs)
   await loadConfig();
+  const fallbackLabel = await loadProfileAndTabs();
 
-  const defaultLabel = await loadProfileAndTabs();
-
+  // 2. Init UI controls
   initThemeToggle();
   initTabs(loadAndRender);
 
@@ -72,9 +82,27 @@ async function init() {
     }
   );
 
-  if (defaultLabel) {
-    loadAndRender(defaultLabel);
-  }
+  // 3. Determine which tab should actually drive the first load:
+  //    Use what's in localStorage (initTabs applied it), otherwise fallback.
+  const activeBtn = document.querySelector('#filterTabs .nav-link.active');
+  const initialLabel = activeBtn?.dataset.filter || fallbackLabel;
+  await loadAndRender(initialLabel);
+
+  // 4. Hide global loader & enable search
+  loader.classList.add('d-none');
+  searchBtn.disabled   = false;
+  searchInput.disabled = false;
+
+  // 5. Re-render when crossing mobile/desktop breakpoint
+  let prevIsMobile = window.innerWidth < 768;
+  window.addEventListener('resize', () => {
+    const currIsMobile = window.innerWidth < 768;
+    if (currIsMobile !== prevIsMobile) {
+      prevIsMobile = currIsMobile;
+      clearCarousel();
+      renderCarousel(currentRepos);
+    }
+  });
 }
 
 document.addEventListener('DOMContentLoaded', init);
