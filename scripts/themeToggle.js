@@ -1,6 +1,3 @@
-/**
- * Inicializa el botón de toggle claro/oscuro y persiste en localStorage.
- */
 export function initThemeToggle() {
   const toggle = document.getElementById('themeToggle');
   const icon = toggle.querySelector('i');

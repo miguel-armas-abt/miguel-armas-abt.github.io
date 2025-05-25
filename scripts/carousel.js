@@ -1,7 +1,5 @@
-// scripts/carousel.js
-/**
- * Limpia el carrusel y los mensajes de estado.
- */
+import { getConfig } from './config.js';
+
 export function clearCarousel() {
   const container = document.getElementById('carouselInner');
   container.innerHTML = '';
@@ -9,11 +7,6 @@ export function clearCarousel() {
   document.getElementById('noData').classList.add('d-none');
 }
 
-/**
- * Renderiza los repos en formato carrusel con 5 tarjetas por slide
- * y cada tarjeta con layout flex-column para igualdad de altura.
- * @param {Array} repos
- */
 export function renderCarousel(repos) {
   const container = document.getElementById('carouselInner');
 
@@ -22,10 +15,10 @@ export function renderCarousel(repos) {
     return;
   }
 
-  const chunkSize = 5;
+  const { carouselSize } = getConfig();
 
   repos.forEach((repo, i) => {
-    const slideIndex = Math.floor(i / chunkSize);
+    const slideIndex = Math.floor(i / carouselSize);
     let slide = container.children[slideIndex];
     if (!slide) {
       slide = document.createElement('div');
@@ -62,7 +55,6 @@ export function renderCarousel(repos) {
     slide.firstChild.appendChild(card);
   });
 
-  // Inicializar tooltips de Bootstrap
   const triggers = document.querySelectorAll('[data-bs-toggle="tooltip"]');
   triggers.forEach(el => new bootstrap.Tooltip(el));
 }

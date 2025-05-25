@@ -1,0 +1,7 @@
+{
+  "apiBase": "http://localhost:8080/poc/repositories/v1",
+  "channelId": "WEB",
+  "username": "miguel-armas-abt",
+  "cacheTtl": 86400000,
+  "carouselSize": 5
+}
