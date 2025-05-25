@@ -1,4 +1,3 @@
-// scripts/app.js
 import { getProfile, getRepos } from './api.js';
 import { initThemeToggle }        from './themeToggle.js';
 import { initSearch }             from './search.js';
@@ -18,19 +17,13 @@ async function loadProfileAndTabs() {
   try {
     const profile = await getProfile(apiBase, traceParent, channelId);
 
-    // Nombre y foto
     document.getElementById('profileName').textContent = profile.fullName;
     document.getElementById('profilePhoto').src        = profile.photoUrl;
 
-    // Ahora el enlace de la foto apunta a LinkedIn
     document.getElementById('profileLink').href        = profile.linkedinUrl;
-
-    // Enlace al CV
     document.getElementById('downloadCv').href         = profile.cvUrl;
-    // Enlace a GitHub
     document.getElementById('githubLink').href         = profile.gitHubUrl;
 
-    // Crear tabs dinámicos
     const tabsContainer = document.getElementById('filterTabs');
     tabsContainer.innerHTML = '';
     profile.repoFilters

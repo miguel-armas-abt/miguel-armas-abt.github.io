@@ -2,65 +2,71 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Portfolio</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" rel="stylesheet">
-    <link href="styles/style.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" rel="stylesheet">
+  <link href="styles/style.css" rel="stylesheet">
 </head>
 <body>
-<!-- Header -->
-<header class="py-3 px-4">
+  <!-- Header -->
+  <header class="py-3 px-4">
     <div class="d-flex justify-content-between align-items-center">
-        <div class="profile d-flex align-items-center">
-            <a id="profileLink" href="#" target="_blank">
-                <img id="profilePhoto" src="" alt="Foto de perfil" width="48" height="48" class="rounded-circle me-2">
-            </a>
-            <h2 id="profileName" class="h6 mb-0"></h2>
-        </div>
-        <div class="header-actions">
-            <button id="themeToggle" class="btn btn-outline-secondary btn-sm">
-                <i class="fas fa-moon"></i>
-            </button>
-            <a id="downloadCv" href="#" class="btn btn-turquoise btn-sm" download>CV</a>
-            <a id="githubLink" href="#" target="_blank" class="btn btn-github">
-                <i class="fab fa-github"></i>
-            </a>
-        </div>
+      <div class="profile d-flex align-items-center">
+        <a id="profileLink" href="#" target="_blank">
+          <img id="profilePhoto" src="" alt="Foto de perfil" width="48" height="48" class="rounded-circle me-2">
+        </a>
+        <h2 id="profileName" class="h6 mb-0"></h2>
+      </div>
+      <div class="header-actions">
+        <button id="themeToggle" class="btn btn-outline-secondary btn-sm">
+          <i class="fas fa-moon"></i>
+        </button>
+        <a id="downloadCv" href="#" class="btn btn-turquoise btn-sm" download>CV</a>
+        <a id="githubLink" href="#" target="_blank" class="btn btn-github">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
     </div>
-</header>
+  </header>
 
-<main class="container my-4">
+  <main class="container my-4">
     <!-- Tabs + Search -->
-    <div class="tabs-container mx-auto">
-        <ul class="nav" id="filterTabs" role="tablist"></ul>
-        <button class="search-btn" id="searchBtn"><i class="fas fa-search"></i></button>
-        <input id="searchInput" class="search-input" placeholder="Buscar repositorio...">
+    <div class="tabs-container w-100">
+      <ul class="nav" id="filterTabs" role="tablist"></ul>
+      <button class="search-btn" id="searchBtn"><i class="fas fa-search"></i></button>
+      <input id="searchInput" class="search-input" placeholder="Buscar repositorio...">
     </div>
 
     <!-- Estado -->
     <div id="loading" class="text-center my-5 d-none">
-        <div class="spinner-border text-primary" role="status">
-            <span class="visually-hidden">Cargando...</span>
-        </div>
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
     </div>
     <div id="error" class="alert alert-danger d-none">Error al cargar repositorios.</div>
     <div id="noData" class="alert alert-info d-none">No hay repositorios para esta etiqueta.</div>
 
     <!-- Carrusel de repositorios -->
-    <div id="repoCarousel" class="carousel slide" data-bs-ride="false">
-        <div class="carousel-inner" id="carouselInner"></div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#repoCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#repoCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        </button>
-    </div>
-</main>
+    <div id="repoCarousel" class="carousel slide position-relative" data-bs-ride="false">
+      <div class="carousel-inner" id="carouselInner"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script type="module" src="scripts/app.js"></script>
+      <!-- Controles personalizados -->
+      <button class="carousel-control-prev custom-carousel-control"
+              type="button" data-bs-target="#repoCarousel" data-bs-slide="prev">
+        <span class="visually-hidden">Anterior</span>
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="carousel-control-next custom-carousel-control"
+              type="button" data-bs-target="#repoCarousel" data-bs-slide="next">
+        <span class="visually-hidden">Siguiente</span>
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="scripts/app.js"></script>
 </body>
 </html>

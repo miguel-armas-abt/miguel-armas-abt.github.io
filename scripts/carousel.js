@@ -1,3 +1,4 @@
+// scripts/carousel.js
 /**
  * Limpia el carrusel y los mensajes de estado.
  */
@@ -9,16 +10,20 @@ export function clearCarousel() {
 }
 
 /**
- * Renderiza los repos en formato carrusel.
+ * Renderiza los repos en formato carrusel con 5 tarjetas por slide
+ * y cada tarjeta con layout flex-column para igualdad de altura.
  * @param {Array} repos
  */
 export function renderCarousel(repos) {
   const container = document.getElementById('carouselInner');
+
   if (repos.length === 0) {
     document.getElementById('noData').classList.remove('d-none');
     return;
   }
-  const chunkSize = 3;
+
+  const chunkSize = 5;
+
   repos.forEach((repo, i) => {
     const slideIndex = Math.floor(i / chunkSize);
     let slide = container.children[slideIndex];
@@ -30,8 +35,9 @@ export function renderCarousel(repos) {
       slide.appendChild(row);
       container.appendChild(slide);
     }
+
     const card = document.createElement('div');
-    card.className = 'card card-custom flex-fill';
+    card.className = 'card card-custom d-flex flex-column';
     card.onclick = () => window.open(repo.url, '_blank');
     card.innerHTML = `
       <div class="card-img-wrapper">
@@ -44,15 +50,19 @@ export function renderCarousel(repos) {
              title="Último push: ${repo.pushedAt}">
           ${repo.name}
         </div>
-        <div class="watcher-pill"><i class="fas fa-eye me-1"></i><span>${repo.watchersCount}</span></div>
+        <div class="watcher-pill">
+          <i class="fas fa-eye me-1"></i><span>${repo.watchersCount}</span>
+        </div>
       </div>
       <div class="card-body">
         <p class="card-text mb-2">${repo.description}</p>
-      </div>`;
+      </div>
+    `;
+
     slide.firstChild.appendChild(card);
   });
 
-  // tooltips
+  // Inicializar tooltips de Bootstrap
   const triggers = document.querySelectorAll('[data-bs-toggle="tooltip"]');
   triggers.forEach(el => new bootstrap.Tooltip(el));
 }
