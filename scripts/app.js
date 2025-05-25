@@ -18,18 +18,17 @@ async function loadProfileAndTabs() {
   try {
     const profile = await getProfile(apiBase, traceParent, channelId);
 
-    // Renderizar nombre y foto
+    // Nombre y foto
     document.getElementById('profileName').textContent = profile.fullName;
     document.getElementById('profilePhoto').src        = profile.photoUrl;
-    document.getElementById('profileLink').href        = profile.photoUrl;
+
+    // Ahora el enlace de la foto apunta a LinkedIn
+    document.getElementById('profileLink').href        = profile.linkedinUrl;
 
     // Enlace al CV
-    const cvLink = document.getElementById('downloadCv');
-    cvLink.href = profile.cvUrl;
-
-    // Enlace dinámico a GitHub
-    const ghLink = document.getElementById('githubLink');
-    ghLink.href = profile.gitHubUrl;
+    document.getElementById('downloadCv').href         = profile.cvUrl;
+    // Enlace a GitHub
+    document.getElementById('githubLink').href         = profile.gitHubUrl;
 
     // Crear tabs dinámicos
     const tabsContainer = document.getElementById('filterTabs');
