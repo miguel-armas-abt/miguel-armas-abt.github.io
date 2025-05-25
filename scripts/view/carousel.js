@@ -18,6 +18,8 @@ function createCard(repo) {
   img.className = 'card-img-top d-none';
   img.alt = repo.name;
   img.src = repo.imageUrl;
+  // img.loading  = 'lazy';
+  img.decoding = 'async';
   img.onload = () => {
     spinner.remove();
     img.classList.remove('d-none');
@@ -68,12 +70,10 @@ export function renderCarousel(repos) {
   const isMobile = window.matchMedia('(max-width: 767.98px)').matches;
 
   if (isMobile) {
-    // Móvil: listado vertical
     repos.forEach(repo => {
       container.appendChild(createCard(repo));
     });
   } else {
-    // Desktop: carousel slides
     repos.forEach((repo, i) => {
       const slideIndex = Math.floor(i / carouselSize);
       let slide = container.children[slideIndex];
@@ -89,7 +89,6 @@ export function renderCarousel(repos) {
     });
   }
 
-  // Inicializar tooltips
   document
     .querySelectorAll('[data-bs-toggle="tooltip"]')
     .forEach(el => new bootstrap.Tooltip(el));
