@@ -1,9 +1,9 @@
-import { loadConfig }       from './commons/config/properties.js';
+import { loadConfig }          from './commons/config/properties.js';
 import { getProfile, getRepos } from './repository/repos_repository.js';
-import { initThemeToggle }  from './view/themeToggle.js';
-import { initSearch }       from './view/search.js';
+import { initThemeToggle }     from './view/themeToggle.js';
+import { initSearch }          from './view/search.js';
 import { clearCarousel, renderCarousel } from './view/carousel.js';
-import { initTabs }         from './view/tabs.js';
+import { initTabs }            from './view/tabs.js';
 import { generateTraceParent } from './commons/tracing/tracing.js';
 
 let currentRepos = [];
@@ -73,8 +73,18 @@ async function init() {
   );
 
   if (defaultLabel) {
-    loadAndRender(defaultLabel);
+    await loadAndRender(defaultLabel);
   }
+
+  let prevIsMobile = window.innerWidth < 768;
+  window.addEventListener('resize', () => {
+    const currIsMobile = window.innerWidth < 768;
+    if (currIsMobile !== prevIsMobile) {
+      prevIsMobile = currIsMobile;
+      clearCarousel();
+      renderCarousel(currentRepos);
+    }
+  });
 }
 
 document.addEventListener('DOMContentLoaded', init);
