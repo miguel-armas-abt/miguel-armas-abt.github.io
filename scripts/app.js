@@ -33,6 +33,7 @@ async function loadProfileAndTabs() {
       tabsContainer.appendChild(li);
     });
 
+  // Return the *first* filter key so we have a fallback.
   return profile.repoFilters[0]?.key || '';
 }
 
@@ -51,19 +52,22 @@ async function loadAndRender(label) {
 }
 
 async function init() {
+  // Show global loader & disable search until ready
   const loader       = document.getElementById('globalLoader');
   const searchBtn    = document.getElementById('searchBtn');
   const searchInput  = document.getElementById('searchInput');
-
   loader.classList.remove('d-none');
   searchBtn.disabled   = true;
   searchInput.disabled = true;
 
+  // 1. Load config + profile (and build tabs)
   await loadConfig();
-  const defaultLabel = await loadProfileAndTabs();
+  const fallbackLabel = await loadProfileAndTabs();
 
+  // 2. Init UI controls
   initThemeToggle();
   initTabs(loadAndRender);
+
   initSearch(
     term => {
       clearCarousel();
@@ -78,14 +82,18 @@ async function init() {
     }
   );
 
-  if (defaultLabel) {
-    await loadAndRender(defaultLabel);
-  }
+  // 3. Determine which tab should actually drive the first load:
+  //    Use what's in localStorage (initTabs applied it), otherwise fallback.
+  const activeBtn = document.querySelector('#filterTabs .nav-link.active');
+  const initialLabel = activeBtn?.dataset.filter || fallbackLabel;
+  await loadAndRender(initialLabel);
 
+  // 4. Hide global loader & enable search
   loader.classList.add('d-none');
   searchBtn.disabled   = false;
   searchInput.disabled = false;
 
+  // 5. Re-render when crossing mobile/desktop breakpoint
   let prevIsMobile = window.innerWidth < 768;
   window.addEventListener('resize', () => {
     const currIsMobile = window.innerWidth < 768;
