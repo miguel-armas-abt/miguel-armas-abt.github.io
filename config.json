@@ -1,0 +1,7 @@
+{
+  "apiBase": "https://repository-finder.vercel.app/poc/repositories/v1",
+  "channelId": "WEB",
+  "username": "miguel-armas-abt",
+  "cacheTtl": 86400000,
+  "carouselSize": 5
+}

@@ -1,104 +1,69 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Portfolio</title>
-    <link rel="stylesheet" href="estilo.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" rel="stylesheet">
+  <link href="styles/style.css" rel="stylesheet">
 </head>
 <body>
-    <!-- MENU HEADER -->
-    <div class="container-header">
-        <header>
-            <div class="logo">
-                <a href="#">Miguel</a>
-            </div>
-            <nav id="nav">
-                <ul>
-                    <li><a href="#home" onclick="select()">INICIO</a></li>
-                    <li><a href="#portfolio" onclick="select()">PORTAFOLIO</a></li>
-                </ul>
-            </nav>
-            <div class="nav-responsive" onclick="hideMenu()">
-                <i class="fa-solid fa-bars"></i>
-            </div>
-        </header>
+  <!-- Header -->
+  <header class="py-3 px-4">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="profile d-flex align-items-center">
+        <a id="profileLink" href="#" target="_blank">
+          <img id="profilePhoto" src="" alt="Foto de perfil" width="48" height="48" class="rounded-circle me-2">
+        </a>
+        <h2 id="profileName" class="h6 mb-0"></h2>
+      </div>
+      <div class="header-actions">
+        <button id="themeToggle" class="btn btn-outline-secondary btn-sm">
+          <i class="fas fa-moon"></i>
+        </button>
+        <a id="downloadCv" href="#" class="btn btn-turquoise btn-sm" download>CV</a>
+        <a id="githubLink" href="#" target="_blank" class="btn btn-github">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container my-4">
+    <!-- Tabs + Search -->
+    <div class="tabs-container w-100 d-flex align-items-center">
+      <ul class="nav flex-grow-1" id="filterTabs" role="tablist"></ul>
+      <div class="search-wrapper">
+        <button class="search-btn" id="searchBtn"><i class="fas fa-search"></i></button>
+        <input id="searchInput" class="search-input" placeholder="Buscar repositorio...">
+      </div>
     </div>
 
-    <!-- HOME -->
-    <section id="home" class="home">
-        <div class="banner-content">
-            <div class="img-container">
-                <img src="img/hero.png" alt="">
-            </div>
-            <h1>MIGUEL ARMAS</h1>
-            <h2>Desarrollador backend</h2>
-            <button id="downloadBtn">
-                Descargar CV <i class="fa-solid fa-download"></i>
-                <span class="overlay"></span>
-            </button>
+    <!-- Status -->
+    <div id="loading" class="text-center my-5 d-none">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+    </div>
+    <div id="error" class="alert alert-danger d-none">Error al cargar repositorios.</div>
+    <div id="noData" class="alert alert-info d-none">No hay repositorios para esta etiqueta.</div>
 
-            <div class="networks">
-                <a href="https://www.linkedin.com/in/miguel-armas-abt/"><i class="fa-brands fa-linkedin-in"></i></a>
-                <a href="https://github.com/miguel-armas-abt/"><i class="fab fa-github"></i></a>
-            </div>
-        </div>
-        <script>
-            document.getElementById('downloadBtn').addEventListener('click', function () {
-                var pdfPath = '/resources/CV_ARMAS_ABT_MIGUEL.pdf';
-                var link = document.createElement('a');
-                link.href = pdfPath;
-                link.download = 'CV_ARMAS_ABT_MIGUEL.pdf';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            });
-        </script>
-    </section>
+    <!-- Repositories carrusel -->
+    <div id="repoCarousel" class="carousel slide position-relative" data-bs-ride="false">
+      <div class="carousel-inner" id="carouselInner"></div>
+      <button class="carousel-control-prev custom-carousel-control" type="button" data-bs-target="#repoCarousel" data-bs-slide="prev">
+        <span class="visually-hidden">Anterior</span>
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="carousel-control-next custom-carousel-control" type="button" data-bs-target="#repoCarousel" data-bs-slide="next">
+        <span class="visually-hidden">Siguiente</span>
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  </main>
 
-    <!-- SECCION PORTFOLIO -->
-    <section id="portfolio" class="portfolio">
-        <div class="content-section">
-            <h2>PORTAFOLIO</h2>
-            <div class="galeria">
-                <a href="https://github.com/miguel-armas-abt/business-customer-v1">
-                    <div class="proyecto">
-                        <img src="img/crud-rest.png" alt="">
-                        <div class="overlay">
-                            <h3>CRUD/RESTful API</h3>
-                            <br>
-                            <p>Spring Boot</p>
-                            <p>Clean architecture</p>
-                        </div>
-                    </div>
-                </a>
-                <a href="https://github.com/miguel-armas-abt/demo-microservices-bbq">
-                    <div class="proyecto">
-                        <img src="img/microservices.png" alt="">
-                        <div class="overlay">
-                            <h3>Microservicios</h3>
-                            <br>
-                            <p>Spring Boot</p>
-                            <p>Quarkus</p>
-                            <p>GO</p>
-                            <p>Docker Compose</p>
-                            <p>Kubernetes</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- footer -->
-    <footer>
-        <a href="#home" class="arriba">
-            <i class="fa-solid fa-angles-up"></i>
-        </a>
-    </footer>
-
-    <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="scripts/app.js"></script>
 </body>
 </html>
