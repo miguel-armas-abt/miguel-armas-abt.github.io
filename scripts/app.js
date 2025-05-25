@@ -51,13 +51,19 @@ async function loadAndRender(label) {
 }
 
 async function init() {
-  await loadConfig();
+  const loader       = document.getElementById('globalLoader');
+  const searchBtn    = document.getElementById('searchBtn');
+  const searchInput  = document.getElementById('searchInput');
 
+  loader.classList.remove('d-none');
+  searchBtn.disabled   = true;
+  searchInput.disabled = true;
+
+  await loadConfig();
   const defaultLabel = await loadProfileAndTabs();
 
   initThemeToggle();
   initTabs(loadAndRender);
-
   initSearch(
     term => {
       clearCarousel();
@@ -75,6 +81,10 @@ async function init() {
   if (defaultLabel) {
     await loadAndRender(defaultLabel);
   }
+
+  loader.classList.add('d-none');
+  searchBtn.disabled   = false;
+  searchInput.disabled = false;
 
   let prevIsMobile = window.innerWidth < 768;
   window.addEventListener('resize', () => {

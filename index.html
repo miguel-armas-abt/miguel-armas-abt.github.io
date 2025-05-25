@@ -9,6 +9,13 @@
   <link href="styles/style.css" rel="stylesheet">
 </head>
 <body>
+  <!-- Loader global -->
+  <div id="globalLoader" class="loader-overlay">
+    <div class="spinner-border loader-spinner" role="status">
+      <span class="visually-hidden">Cargando...</span>
+    </div>
+  </div>
+
   <!-- Header -->
   <header class="py-3 px-4">
     <div class="d-flex justify-content-between align-items-center">
@@ -35,8 +42,10 @@
     <div class="tabs-container w-100 d-flex align-items-center">
       <ul class="nav flex-grow-1" id="filterTabs" role="tablist"></ul>
       <div class="search-wrapper">
-        <button class="search-btn" id="searchBtn"><i class="fas fa-search"></i></button>
-        <input id="searchInput" class="search-input" placeholder="Buscar repositorio...">
+        <button id="searchBtn" class="search-btn" disabled>
+          <i class="fas fa-search"></i>
+        </button>
+        <input id="searchInput" class="search-input" placeholder="Buscar repositorio..." disabled>
       </div>
     </div>
 
@@ -52,11 +61,11 @@
     <!-- Repositories carrusel -->
     <div id="repoCarousel" class="carousel slide position-relative" data-bs-ride="false">
       <div class="carousel-inner" id="carouselInner"></div>
-      <button class="carousel-control-prev custom-carousel-control" type="button" data-bs-target="#repoCarousel" data-bs-slide="prev">
+      <button class="carousel-control-prev custom-carousel-control d-none d-md-flex" type="button" data-bs-target="#repoCarousel" data-bs-slide="prev">
         <span class="visually-hidden">Anterior</span>
         <i class="fas fa-chevron-left"></i>
       </button>
-      <button class="carousel-control-next custom-carousel-control" type="button" data-bs-target="#repoCarousel" data-bs-slide="next">
+      <button class="carousel-control-next custom-carousel-control d-none d-md-flex" type="button" data-bs-target="#repoCarousel" data-bs-slide="next">
         <span class="visually-hidden">Siguiente</span>
         <i class="fas fa-chevron-right"></i>
       </button>
