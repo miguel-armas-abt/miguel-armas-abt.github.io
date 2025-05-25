@@ -1,10 +1,10 @@
-import { loadConfig }       from './config.js';
-import { getProfile, getRepos } from './api.js';
-import { initThemeToggle }  from './themeToggle.js';
-import { initSearch }       from './search.js';
-import { clearCarousel, renderCarousel } from './carousel.js';
-import { initTabs }         from './tabs.js';
-import { generateTraceParent } from './tracing.js';
+import { loadConfig }       from './commons/config/properties.js';
+import { getProfile, getRepos } from './repository/repos_repository.js';
+import { initThemeToggle }  from './view/themeToggle.js';
+import { initSearch }       from './view/search.js';
+import { clearCarousel, renderCarousel } from './view/carousel.js';
+import { initTabs }         from './view/tabs.js';
+import { generateTraceParent } from './commons/tracing/tracing.js';
 
 let currentRepos = [];
 

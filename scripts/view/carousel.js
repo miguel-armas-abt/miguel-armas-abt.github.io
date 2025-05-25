@@ -1,4 +1,4 @@
-import { getConfig } from './config.js';
+import { getConfig } from '../commons/config/properties.js';
 
 export function clearCarousel() {
   const container = document.getElementById('carouselInner');

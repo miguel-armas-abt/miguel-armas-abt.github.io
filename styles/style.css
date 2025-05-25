@@ -39,7 +39,6 @@ header { background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: ba
 /* Search */
 .search-wrapper {
   position: relative;
-  /* mismo alto que la barra de tabs */
   height: 40px;
   margin-left: 16px;
 }
@@ -71,8 +70,6 @@ header { background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: ba
 .search-input:focus {
   outline: none;
 }
-
-
 
 /* Cards */
 .card-custom {
