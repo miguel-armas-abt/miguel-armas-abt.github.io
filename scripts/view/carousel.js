@@ -7,13 +7,11 @@ function createCard(repo) {
 
   const imgWrapper = document.createElement('div');
   imgWrapper.className = 'card-img-wrapper position-relative';
-
   const spinner = document.createElement('div');
   spinner.className = 'spinner-border text-turquoise position-absolute top-50 start-50 translate-middle';
   spinner.setAttribute('role', 'status');
   spinner.innerHTML = `<span class="visually-hidden">Cargando imagen…</span>`;
   imgWrapper.appendChild(spinner);
-
   const img = document.createElement('img');
   img.className = 'card-img-top d-none';
   img.alt = repo.name;
@@ -51,19 +49,6 @@ function createCard(repo) {
   descContainer.appendChild(desc);
   body.appendChild(descContainer);
 
-  setTimeout(() => {
-    if (desc.scrollHeight > descContainer.clientHeight) {
-      const btn = document.createElement('button');
-      btn.className = 'expand-btn';
-      btn.innerHTML = '<i class="fas fa-ellipsis-h"></i>';
-      btn.addEventListener('click', e => {
-        e.stopPropagation();
-        card.classList.toggle('expanded');
-      });
-      descContainer.appendChild(btn);
-    }
-  }, 0);
-
   card.appendChild(imgWrapper);
   card.appendChild(body);
   return card;
@@ -89,9 +74,7 @@ export function renderCarousel(repos) {
   const isMobile = window.matchMedia('(max-width: 767.98px)').matches;
 
   if (isMobile) {
-    repos.forEach(repo => {
-      container.appendChild(createCard(repo));
-    });
+    repos.forEach(repo => container.appendChild(createCard(repo)));
   } else {
     repos.forEach((repo, i) => {
       const slideIndex = Math.floor(i / carouselSize);
@@ -110,4 +93,34 @@ export function renderCarousel(repos) {
 
   document.querySelectorAll('[data-bs-toggle="tooltip"]')
           .forEach(el => new bootstrap.Tooltip(el));
+}
+
+export function updateExpandButtons() {
+  const carousel = document.getElementById('repoCarousel');
+  const activeSlide = carousel.querySelector('.carousel-item.active');
+  if (!activeSlide) return;
+
+  activeSlide.querySelectorAll('.card-custom').forEach(card => {
+    const body = card.querySelector('.card-body');
+    if (body.querySelector('.expand-btn')) return;
+
+    const descContainer = body.querySelector('.description-container');
+    const desc = descContainer.querySelector('.card-text');
+    if (desc.scrollHeight > descContainer.clientHeight) {
+      const btn = document.createElement('button');
+      btn.className = 'expand-btn';
+      btn.innerHTML = '<i class="fas fa-ellipsis-h"></i>';
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const isMobile = window.matchMedia('(max-width: 767.98px)').matches;
+        if (isMobile) {
+          card.classList.toggle('expanded');
+        } else {
+          activeSlide.querySelectorAll('.card-custom')
+            .forEach(c => c.classList.toggle('expanded'));
+        }
+      });
+      body.appendChild(btn);
+    }
+  });
 }

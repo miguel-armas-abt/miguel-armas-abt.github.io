@@ -85,7 +85,9 @@ header { background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: ba
 }
 
 .carousel-item > .d-flex {
-  display: flex; gap: 1rem; align-items: stretch;
+  display: flex;
+  gap: 1rem;
+  align-items: stretch;
 }
 
 .card-body {
@@ -96,7 +98,7 @@ header { background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: ba
 .description-container {
   position: relative;
   overflow: hidden;
-  max-height: 4.5em; /* aproximadamente 3 líneas */
+  max-height: 4.4em; /* ~3 líneas */
   transition: max-height 0.3s ease;
   margin-bottom: 8px;
 }
@@ -106,12 +108,20 @@ header { background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: ba
 }
 
 .expand-btn {
-  position: absolute;
-  bottom: 0; right: 8px;
-  background: none; border: none;
-  font-size: 1rem; color: #888;
+  background-color: #ccc;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem auto 0;
+  color: #555;
   cursor: pointer;
-  padding: 0;
+}
+.expand-btn i {
+  font-size: 1rem;
 }
 
 .label-pill {
@@ -166,7 +176,6 @@ body.dark-mode .search-input {
   background: #1e1e1e; border-color: #333; color: #e0e0e0;
 }
 
-/* Loader global */
 .loader-overlay {
   position: fixed; inset: 0;
   background: rgba(255, 255, 255, 0.85);
@@ -183,26 +192,23 @@ body.dark-mode .loader-overlay .loader-spinner {
   color: #004f55 !important;
 }
 
-/* Disabled search */
 .search-btn[disabled],
 .search-input[disabled] {
   opacity: 0.6; cursor: not-allowed;
 }
 
-/* Carrusel desktop */
 #repoCarousel,
 #repoCarousel .carousel-inner,
 #repoCarousel .carousel-item {
   overflow: visible !important;
 }
 .carousel-item > .d-flex {
-  display: flex; gap: 1rem;
+  display: flex; gap: 1rem; align-items: stretch;
 }
 .carousel-item > .d-flex > .card-custom {
   flex: 0 0 calc((100% - 4rem) / 5);
 }
 
-/* Controles de carousel en desktop */
 .custom-carousel-control {
   position: absolute; top: 50%;
   width: 40px; height: 40px;
@@ -226,13 +232,10 @@ body.dark-mode .loader-overlay .loader-spinner {
   font-size: 1.2rem;
 }
 
-/* Responsive móvil */
 @media (max-width: 767.98px) {
-  /* Ocultar controles del carousel */
   #repoCarousel .custom-carousel-control {
     display: none !important;
   }
-  /* Apilar vertical slides */
   #repoCarousel .carousel-inner {
     display: block !important; padding: 0 1rem;
   }
@@ -246,7 +249,6 @@ body.dark-mode .loader-overlay .loader-spinner {
     width: 100% !important; margin-bottom: 1rem;
   }
 
-  /* Tabs + Search en columna */
   .tabs-container {
     flex-direction: column; align-items: center; gap: 12px;
     padding: 12px 16px;
@@ -270,20 +272,19 @@ body.dark-mode .loader-overlay .loader-spinner {
   }
 }
 
-/* Indicador de página */
 .carousel-indicator {
   background-color: #007a87;
   color: #fff;
   padding: 6px 12px;
   border-radius: 16px;
   font-size: 0.9rem;
-  margin: 1rem auto 0;
+  margin-top: 1rem;
   display: inline-block;
   box-shadow: 0 1px 4px rgba(0,0,0,0.2);
   text-align: center;
   z-index: 5;
 }
-/* Ocultar indicador en mobile */
+
 @media (max-width: 767.98px) {
   #carouselIndicator {
     display: none !important;
