@@ -239,3 +239,25 @@ body.dark-mode .loader-overlay .loader-spinner {
     padding: 0 16px; border-radius: 20px; border: 1px solid #ccc;
   }
 }
+
+/* Estilos para el indicador de página */
+.carousel-indicator {
+  background-color: #007a87;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 0.9rem;
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  z-index: 5;
+}
+
+/* Ocultar indicador en mobile */
+@media (max-width: 767.98px) {
+  #carouselIndicator {
+    display: none !important;
+  }
+}

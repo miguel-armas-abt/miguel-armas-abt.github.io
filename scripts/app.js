@@ -8,6 +8,16 @@ import { generateTraceParent } from './commons/tracing/tracing.js';
 
 let currentRepos = [];
 
+function updateCarouselIndicator() {
+  const carousel = document.getElementById('repoCarousel');
+  const items = Array.from(carousel.querySelectorAll('.carousel-item'));
+  const total = items.length;
+  const activeItem = carousel.querySelector('.carousel-item.active');
+  const index = items.indexOf(activeItem) + 1;
+  const indicator = document.getElementById('carouselIndicator');
+  indicator.textContent = `${index} de ${total}`;
+}
+
 async function loadProfileAndTabs() {
   const traceParent = generateTraceParent();
   const profile     = await getProfile(traceParent);
@@ -33,7 +43,6 @@ async function loadProfileAndTabs() {
       tabsContainer.appendChild(li);
     });
 
-  // Return the *first* filter key so we have a fallback.
   return profile.repoFilters[0]?.key || '';
 }
 
@@ -43,8 +52,13 @@ async function loadAndRender(label) {
   try {
     const traceParent = generateTraceParent();
     currentRepos = await getRepos(label, traceParent);
+
+    currentRepos.sort((a, b) => a.priority - b.priority);
+
     document.getElementById('loading').classList.add('d-none');
     renderCarousel(currentRepos);
+
+    updateCarouselIndicator();
   } catch {
     document.getElementById('loading').classList.add('d-none');
     document.getElementById('error').classList.remove('d-none');
@@ -52,7 +66,6 @@ async function loadAndRender(label) {
 }
 
 async function init() {
-  // Show global loader & disable search until ready
   const loader       = document.getElementById('globalLoader');
   const searchBtn    = document.getElementById('searchBtn');
   const searchInput  = document.getElementById('searchInput');
@@ -60,11 +73,9 @@ async function init() {
   searchBtn.disabled   = true;
   searchInput.disabled = true;
 
-  // 1. Load config + profile (and build tabs)
   await loadConfig();
   const fallbackLabel = await loadProfileAndTabs();
 
-  // 2. Init UI controls
   initThemeToggle();
   initTabs(loadAndRender);
 
@@ -72,28 +83,30 @@ async function init() {
     term => {
       clearCarousel();
       const filtered = currentRepos.filter(r =>
-        r.name.toLowerCase().includes(term)
+        r.name.toLowerCase().includes(term) ||
+        (r.description && r.description.toLowerCase().includes(term))
       );
       renderCarousel(filtered);
+      updateCarouselIndicator();
     },
     () => {
       clearCarousel();
       renderCarousel(currentRepos);
+      updateCarouselIndicator();
     }
   );
 
-  // 3. Determine which tab should actually drive the first load:
-  //    Use what's in localStorage (initTabs applied it), otherwise fallback.
   const activeBtn = document.querySelector('#filterTabs .nav-link.active');
   const initialLabel = activeBtn?.dataset.filter || fallbackLabel;
   await loadAndRender(initialLabel);
 
-  // 4. Hide global loader & enable search
   loader.classList.add('d-none');
   searchBtn.disabled   = false;
   searchInput.disabled = false;
 
-  // 5. Re-render when crossing mobile/desktop breakpoint
+  const carouselEl = document.getElementById('repoCarousel');
+  carouselEl.addEventListener('slid.bs.carousel', updateCarouselIndicator);
+
   let prevIsMobile = window.innerWidth < 768;
   window.addEventListener('resize', () => {
     const currIsMobile = window.innerWidth < 768;
@@ -101,6 +114,7 @@ async function init() {
       prevIsMobile = currIsMobile;
       clearCarousel();
       renderCarousel(currentRepos);
+      updateCarouselIndicator();
     }
   });
 }

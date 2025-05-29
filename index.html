@@ -1,3 +1,4 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -41,7 +42,7 @@
     </div>
   </header>
 
-  <main class="container my-4">
+  <main class="container my-4 position-relative">
     <!-- Tabs + Search -->
     <div class="tabs-container w-100 d-flex align-items-center">
       <ul class="nav flex-grow-1" id="filterTabs" role="tablist"></ul>
@@ -55,7 +56,6 @@
 
     <!-- Status -->
     <div id="loading" class="text-center my-5 d-none">
-      <!-- Spinner usa loader-spinner para color turquesa -->
       <div class="spinner-border loader-spinner" role="status">
         <span class="visually-hidden">Cargando...</span>
       </div>
@@ -74,6 +74,9 @@
         <span class="visually-hidden">Siguiente</span>
         <i class="fas fa-chevron-right"></i>
       </button>
+
+      <div id="carouselIndicator"
+           class="carousel-indicator d-none d-md-inline-block"></div>
     </div>
   </main>
 

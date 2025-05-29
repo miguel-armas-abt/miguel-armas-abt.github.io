@@ -18,7 +18,6 @@ function createCard(repo) {
   img.className = 'card-img-top d-none';
   img.alt = repo.name;
   img.src = repo.imageUrl;
-  // img.loading  = 'lazy';
   img.decoding = 'async';
   img.onload = () => {
     spinner.remove();
@@ -26,6 +25,7 @@ function createCard(repo) {
   };
   imgWrapper.appendChild(img);
 
+  // Label y watchers
   const label = document.createElement('div');
   label.className = 'label-pill';
   label.setAttribute('data-bs-toggle', 'tooltip');
@@ -43,7 +43,10 @@ function createCard(repo) {
 
   const body = document.createElement('div');
   body.className = 'card-body';
-  body.innerHTML = `<p class="card-text mb-2">${repo.description}</p>`;
+  const desc = document.createElement('div');
+  desc.className = 'card-text mb-2';
+  desc.innerHTML = repo.description || ''; 
+  body.appendChild(desc);
 
   card.appendChild(imgWrapper);
   card.appendChild(body);
