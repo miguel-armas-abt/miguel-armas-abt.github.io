@@ -84,6 +84,36 @@ header { background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: ba
   object-fit: cover;
 }
 
+.carousel-item > .d-flex {
+  display: flex; gap: 1rem; align-items: stretch;
+}
+
+.card-body {
+  display: flex; flex-direction: column; padding: 16px;
+  flex: 1;
+}
+
+.description-container {
+  position: relative;
+  overflow: hidden;
+  max-height: 4.5em; /* aproximadamente 3 líneas */
+  transition: max-height 0.3s ease;
+  margin-bottom: 8px;
+}
+
+.card-custom.expanded .description-container {
+  max-height: none;
+}
+
+.expand-btn {
+  position: absolute;
+  bottom: 0; right: 8px;
+  background: none; border: none;
+  font-size: 1rem; color: #888;
+  cursor: pointer;
+  padding: 0;
+}
+
 .label-pill {
   position: absolute; top: 8px; left: 8px;
   background: rgba(0,0,0,0.6); color: #fff;
@@ -240,21 +270,19 @@ body.dark-mode .loader-overlay .loader-spinner {
   }
 }
 
-/* Estilos para el indicador de página */
+/* Indicador de página */
 .carousel-indicator {
   background-color: #007a87;
   color: #fff;
   padding: 6px 12px;
   border-radius: 16px;
   font-size: 0.9rem;
-  position: absolute;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
+  margin: 1rem auto 0;
+  display: inline-block;
   box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  text-align: center;
   z-index: 5;
 }
-
 /* Ocultar indicador en mobile */
 @media (max-width: 767.98px) {
   #carouselIndicator {

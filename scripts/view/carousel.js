@@ -25,7 +25,6 @@ function createCard(repo) {
   };
   imgWrapper.appendChild(img);
 
-  // Label y watchers
   const label = document.createElement('div');
   label.className = 'label-pill';
   label.setAttribute('data-bs-toggle', 'tooltip');
@@ -43,10 +42,27 @@ function createCard(repo) {
 
   const body = document.createElement('div');
   body.className = 'card-body';
+
+  const descContainer = document.createElement('div');
+  descContainer.className = 'description-container';
   const desc = document.createElement('div');
-  desc.className = 'card-text mb-2';
-  desc.innerHTML = repo.description || ''; 
-  body.appendChild(desc);
+  desc.className = 'card-text';
+  desc.innerHTML = repo.description || '';
+  descContainer.appendChild(desc);
+  body.appendChild(descContainer);
+
+  setTimeout(() => {
+    if (desc.scrollHeight > descContainer.clientHeight) {
+      const btn = document.createElement('button');
+      btn.className = 'expand-btn';
+      btn.innerHTML = '<i class="fas fa-ellipsis-h"></i>';
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        card.classList.toggle('expanded');
+      });
+      descContainer.appendChild(btn);
+    }
+  }, 0);
 
   card.appendChild(imgWrapper);
   card.appendChild(body);
@@ -92,7 +108,6 @@ export function renderCarousel(repos) {
     });
   }
 
-  document
-    .querySelectorAll('[data-bs-toggle="tooltip"]')
-    .forEach(el => new bootstrap.Tooltip(el));
+  document.querySelectorAll('[data-bs-toggle="tooltip"]')
+          .forEach(el => new bootstrap.Tooltip(el));
 }
