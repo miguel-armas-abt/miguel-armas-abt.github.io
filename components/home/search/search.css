@@ -1,0 +1,92 @@
+/* ===========================
+   Search Component Styles
+   =========================== */
+
+/* Wrapper: relative to position input over button, fixed height */
+.search-wrapper {
+  position: relative;
+  height: 40px;
+  margin-left: 16px;
+}
+
+/* Search button: circular, centered icon, primary color */
+.search-btn {
+  background: #007a87;
+  border: none;
+  color: #fff;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  cursor: pointer;
+  transition: background 0.3s;
+  z-index: 1;
+}
+
+/* Input field: initially hidden, absolute overlay, rounded */
+.search-input {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 100%;
+  border: 1px solid #ccc;
+  border-radius: 24px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  background: #fff;
+  color: #333;
+  z-index: 2;
+  transition: width 0.3s;
+}
+
+/* Remove default focus outline */
+.search-input:focus {
+  outline: none;
+}
+
+/* Disabled styles: reduce opacity and disable pointer */
+.search-btn[disabled],
+.search-input[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ===========================
+   Responsive Adjustments
+   =========================== */
+
+/* On small screens:
+   - Make wrapper static and full-width
+   - Always show button
+   - Show input full-width minus button space */
+@media (max-width: 767.98px) {
+  .search-wrapper {
+    order: 2;
+    position: static;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 0;
+  }
+
+  .search-btn {
+    display: flex !important;
+  }
+
+  .search-input {
+    display: block !important;
+    position: static;
+    width: calc(100% - 48px);
+    max-width: 300px;
+    height: 40px;
+    padding: 0 16px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+  }
+}

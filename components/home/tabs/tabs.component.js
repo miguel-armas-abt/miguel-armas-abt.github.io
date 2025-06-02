@@ -1,6 +1,8 @@
+import { getSavedTab, setSavedTab } from './tabs.service.js';
+
 export function initTabs(onTabSelect) {
   const tabs = document.querySelectorAll('#filterTabs .nav-link');
-  const saved = localStorage.getItem('selectedTab');
+  const saved = getSavedTab();
 
   if (saved) {
     tabs.forEach(tab => {
@@ -16,7 +18,7 @@ export function initTabs(onTabSelect) {
     tab.addEventListener('click', () => {
       document.querySelectorAll('#filterTabs .nav-link').forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
-      localStorage.setItem('selectedTab', tab.dataset.filter);
+      setSavedTab(tab.dataset.filter);
       onTabSelect(tab.dataset.filter);
     });
   });

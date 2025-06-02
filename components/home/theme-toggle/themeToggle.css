@@ -1,0 +1,57 @@
+/* ===========================
+   Dark Mode Overrides
+   =========================== */
+
+/* Dark-mode tabs container: darker background and stronger shadow */
+body.dark-mode .tabs-container {
+  background: #1e1e1e;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+}
+
+/* Dark-mode tab links: light text color */
+body.dark-mode .nav-link {
+  color: #e0e0e0;
+}
+
+/* Dark-mode active tab: contrasting background and white text */
+body.dark-mode .nav-link.active {
+  background-color: #005f63;
+  color: #fff;
+}
+
+/* Dark-mode search button: muted primary color */
+body.dark-mode .search-btn {
+  background: #005f63;
+}
+
+/* Dark-mode card container: dark background and subtle shadow */
+body.dark-mode .card-custom {
+  background: #1e1e1e;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+
+/* Dark-mode card body: light text color */
+body.dark-mode .card-body {
+  color: #e0e0e0;
+}
+
+/* Dark-mode label pill: keep semi-transparent black background and white text */
+body.dark-mode .label-pill {
+  background: rgba(0,0,0,0.6) !important;
+  color: #fff !important;
+}
+
+/* Dark-mode watcher pill: darker translucent background and light text */
+body.dark-mode .watcher-pill {
+  background: rgba(255,255,255,0.2);
+  color: #e0e0e0;
+}
+
+/* Dark-mode watcher icon/text: darker icon color for contrast */
+body.dark-mode .watcher-pill i,
+body.dark-mode .watcher-pill span {
+  color: #484848 !important;
+}
+
+/* Dark-mode primary button: darker turquoise shade */
+body.dark-mode .bt

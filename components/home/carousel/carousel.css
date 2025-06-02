@@ -1,0 +1,191 @@
+/* ===========================
+   Carousel Card Styles
+   =========================== */
+
+/* Card container: white background, rounded corners, shadow, flex column layout */
+.card-custom {
+  background: #fff;
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Image wrapper: fixed height, hides overflow for cover effect */
+.card-img-wrapper {
+  position: relative;
+  height: 140px;
+  overflow: hidden;
+}
+
+/* Image styling: cover entire wrapper without distortion */
+.card-img-top {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Slide row: flex container with gap between cards */
+.carousel-item > .d-flex {
+  display: flex;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+/* Distribute five cards evenly across slide width */
+.carousel-item > .d-flex > .card-custom {
+  flex: 0 0 calc((100% - 4rem) / 5);
+}
+
+/* Card body: vertical flex layout with padding, fills remaining space */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  flex: 1;
+}
+
+/* Description container: limit height to ~3 lines, hide overflow */
+.description-container {
+  position: relative;
+  overflow: hidden;
+  max-height: 4.4em; /* ~3 lines */
+  transition: max-height 0.3s ease;
+  margin-bottom: 8px;
+}
+
+/* Expanded state: remove height restriction to show full text */
+.card-custom.expanded .description-container {
+  max-height: none;
+}
+
+/* Expand button: circular, centered below description */
+.expand-btn {
+  background-color: #ccc;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem auto 0;
+  color: #555;
+  cursor: pointer;
+}
+.expand-btn i {
+  font-size: 1rem;
+}
+
+/* Label pill: positioned top-left, semi-transparent background */
+.label-pill {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  text-transform: none;
+}
+
+/* Watcher pill: positioned top-right with light background */
+.watcher-pill {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(255,255,255,0.8);
+  color: #484848;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+}
+
+/* ===========================
+   Carousel Controls
+   =========================== */
+
+/* Control buttons: circular, overlayed on carousel edges */
+.custom-carousel-control {
+  position: absolute;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  background: rgba(0,0,0,0.6);
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  z-index: 10;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+  transition: background 0.3s;
+}
+.custom-carousel-control:hover {
+  background: rgba(0,0,0,0.8);
+}
+.custom-carousel-control.carousel-control-prev {
+  left: 0;
+  transform: translate(-100%, -50%);
+}
+.custom-carousel-control.carousel-control-next {
+  right: 0;
+  transform: translate(100%, -50%);
+}
+.custom-carousel-control i {
+  font-size: 1.2rem;
+}
+
+/* ===========================
+   Carousel Indicator
+   =========================== */
+
+/* Indicator label: styled block below carousel */
+.carousel-indicator {
+  background-color: #007a87;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  display: inline-block;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  text-align: center;
+  z-index: 5;
+}
+
+/* ===========================
+   Responsive Adjustments
+   =========================== */
+
+/* On small screens:
+   - Hide control buttons
+   - Stack cards vertically
+   - Make cards full-width with bottom margin */
+@media (max-width: 767.98px) {
+  #repoCarousel .custom-carousel-control {
+    display: none !important;
+  }
+  #repoCarousel .carousel-inner {
+    display: block !important;
+    padding: 0 1rem;
+  }
+  #repoCarousel .carousel-item {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    transform: none !important;
+  }
+  #repoCarousel .carousel-inner .card-custom {
+    width: 100% !important;
+    margin-bottom: 1rem;
+  }
+}

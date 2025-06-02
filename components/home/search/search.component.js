@@ -1,5 +1,5 @@
 export function initSearch(onSearch, onReset) {
-  const btn   = document.getElementById('searchBtn');
+  const btn = document.getElementById('searchBtn');
   const input = document.getElementById('searchInput');
 
   btn.addEventListener('click', () => {

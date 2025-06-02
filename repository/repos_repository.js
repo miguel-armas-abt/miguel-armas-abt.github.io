@@ -1,4 +1,4 @@
-import { getConfig } from '../commons/config/properties.js';
+import { getConfig } from '../commons/properties.js';
 
 const CACHE_KEY_PROFILE = 'profileCache_';
 const CACHE_KEY_REPOS   = 'repoCache_';

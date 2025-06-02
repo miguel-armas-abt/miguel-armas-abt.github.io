@@ -1,6 +1,6 @@
-import { getConfig } from '../commons/config/properties.js';
+import { getConfig } from '../../../commons/properties.js';
 
-function createCard(repo) {
+export function createCard(repo) {
   const card = document.createElement('div');
   card.className = 'card card-custom d-flex flex-column';
   card.onclick = () => window.open(repo.url, '_blank');
@@ -123,4 +123,13 @@ export function updateExpandButtons() {
       body.appendChild(btn);
     }
   });
+}
+
+export function updateCarouselIndicator() {
+  const carousel = document.getElementById('repoCarousel');
+  const items = Array.from(carousel.querySelectorAll('.carousel-item'));
+  const total = items.length;
+  const activeItem = carousel.querySelector('.carousel-item.active');
+  const index = items.indexOf(activeItem) + 1;
+  document.getElementById('carouselIndicator').textContent = `${index}/${total}`;
 }

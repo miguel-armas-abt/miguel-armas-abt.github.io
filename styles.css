@@ -1,0 +1,122 @@
+/* ===========================
+   Base Styles
+   =========================== */
+
+/* Page background and text transition */
+body {
+  background-color: #f7f7f7;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Header: white background with subtle shadow and smooth transitions */
+header {
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+/* ===========================
+   Profile Section
+   =========================== */
+
+/* Profile container: horizontal alignment */
+.profile {
+  display: flex;
+  align-items: center;
+}
+
+/* Profile image: circular, fixed size, margin to separate from text */
+.profile a img {
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  margin-right: 8px;
+}
+
+/* Profile name: font size and reset margin */
+.profile h2 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* ===========================
+   Header Actions
+   =========================== */
+
+/* Container for action buttons: horizontal alignment */
+.header-actions {
+  display: flex;
+  align-items: center;
+}
+
+/* Spacing between buttons */
+.header-actions .btn {
+  margin-left: 8px;
+}
+
+/* Turquoise button: brand color background and border, white text */
+.btn-turquoise {
+  background-color: #007a87;
+  border: 1px solid #007a87;
+  color: #fff;
+}
+
+/* GitHub button: circular, centered icon, dark border and text */
+.btn-github {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #484848;
+  color: #484848;
+}
+
+/* ===========================
+   Global Loader Overlay
+   =========================== */
+
+/* Full-screen semi-transparent overlay centering loader */
+.loader-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+/* Hide overlay when not needed */
+.loader-overlay.d-none {
+  display: none !important;
+}
+
+/* Loader spinner: brand color */
+.loader-overlay .loader-spinner {
+  color: #007a87 !important;
+}
+
+/* Dark-mode spinner: adjusted brand shade */
+body.dark-mode .loader-overlay .loader-spinner {
+  color: #004f55 !important;
+}
+
+/* ===========================
+   Dark Mode Base Overrides
+   =========================== */
+
+/* Page background and text color for dark mode */
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+/* Header in dark mode: darker background and stronger shadow */
+body.dark-mode header {
+  background: #1e1e1e;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}

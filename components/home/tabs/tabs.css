@@ -1,0 +1,65 @@
+/* ===========================
+   Tabs Component Styles
+   =========================== */
+
+/* Container: white background, rounded corners, horizontal flex layout */
+.tabs-container {
+  background: #fff;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+/* Tab links: transparent background, no border, spaced evenly */
+.tabs-container .nav-link {
+  background: transparent;
+  border: none;
+  color: #484848;
+  margin: 0 12px;
+  border-radius: 16px;
+  padding: 8px 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* Active tab: primary background color and white text */
+.tabs-container .nav-link.active {
+  background-color: #007a87;
+  color: #fff;
+}
+
+/* ===========================
+   Responsive Adjustments
+   =========================== */
+
+/* On small screens:
+   - Stack tabs vertically
+   - Full-width tab links with max width */
+@media (max-width: 767.98px) {
+  .tabs-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+  }
+
+  #filterTabs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  #filterTabs .nav-link {
+    width: 100%;
+    max-width: 300px;
+    margin: 6px 0;
+    text-align: center;
+  }
+}
