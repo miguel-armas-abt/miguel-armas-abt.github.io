@@ -92,15 +92,22 @@ export function renderCarousel(repos) {
   }
 
   document.querySelectorAll('[data-bs-toggle="tooltip"]')
-          .forEach(el => new bootstrap.Tooltip(el));
+      .forEach(el => new bootstrap.Tooltip(el));
 }
 
 export function updateExpandButtons() {
-  const carousel = document.getElementById('repoCarousel');
-  const activeSlide = carousel.querySelector('.carousel-item.active');
-  if (!activeSlide) return;
+  const isMobile = window.matchMedia('(max-width: 767.98px)').matches;
+  let cards = [];
 
-  activeSlide.querySelectorAll('.card-custom').forEach(card => {
+  if (isMobile) {
+    cards = Array.from(document.querySelectorAll('#carouselInner .card-custom'));
+  } else {
+    const activeSlide = document.querySelector('#repoCarousel .carousel-item.active');
+    if (!activeSlide) return;
+    cards = Array.from(activeSlide.querySelectorAll('.card-custom'));
+  }
+
+  cards.forEach(card => {
     const body = card.querySelector('.card-body');
     if (body.querySelector('.expand-btn')) return;
 
@@ -112,12 +119,12 @@ export function updateExpandButtons() {
       btn.innerHTML = '<i class="fas fa-ellipsis-h"></i>';
       btn.addEventListener('click', e => {
         e.stopPropagation();
-        const isMobile = window.matchMedia('(max-width: 767.98px)').matches;
         if (isMobile) {
           card.classList.toggle('expanded');
         } else {
+          const activeSlide = document.querySelector('#repoCarousel .carousel-item.active');
           activeSlide.querySelectorAll('.card-custom')
-            .forEach(c => c.classList.toggle('expanded'));
+              .forEach(c => c.classList.toggle('expanded'));
         }
       });
       body.appendChild(btn);
@@ -126,10 +133,9 @@ export function updateExpandButtons() {
 }
 
 export function updateCarouselIndicator() {
-  const carousel = document.getElementById('repoCarousel');
-  const items = Array.from(carousel.querySelectorAll('.carousel-item'));
+  const items = Array.from(document.querySelectorAll('#repoCarousel .carousel-item'));
   const total = items.length;
-  const activeItem = carousel.querySelector('.carousel-item.active');
+  const activeItem = document.querySelector('#repoCarousel .carousel-item.active');
   const index = items.indexOf(activeItem) + 1;
   document.getElementById('carouselIndicator').textContent = `${index}/${total}`;
 }
