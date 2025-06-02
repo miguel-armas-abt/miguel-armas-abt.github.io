@@ -1,5 +1,5 @@
 {
-  "apiBase": "http://localhost:8080/poc/repositories/v1",
+  "apiBase": "https://repository-finder.vercel.app/poc/repositories/v1",
   "channelId": "WEB",
   "username": "miguel-armas-abt",
   "cacheTtl": 2592000000,
