@@ -82,6 +82,7 @@ async function init() {
     import('./components/home/carousel/carousel.component.js').then(module => {
       module.updateCarouselIndicator();
       module.updateExpandButtons();
+      module.updateControlsVisibility();
     });
   });
 
@@ -98,11 +99,19 @@ async function init() {
 }
 
 async function loadFilteredCarousel(filteredRepos) {
-  const { clearCarousel, renderCarousel, updateCarouselIndicator, updateExpandButtons } = await import('./components/home/carousel/carousel.component.js');
+  const {
+    clearCarousel,
+    renderCarousel,
+    updateCarouselIndicator,
+    updateExpandButtons,
+    updateControlsVisibility
+  } = await import('./components/home/carousel/carousel.component.js');
+
   clearCarousel();
   renderCarousel(filteredRepos);
   updateCarouselIndicator();
   updateExpandButtons();
+  updateControlsVisibility();
 }
 
 document.addEventListener('DOMContentLoaded', init);

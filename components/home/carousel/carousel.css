@@ -41,19 +41,20 @@
   flex: 0 0 calc((100% - 4rem) / 5);
 }
 
-/* Card body: vertical flex layout with padding, fills remaining space */
+/* Card body: vertical flex layout with padding, fill remaining space */
 .card-body {
   display: flex;
   flex-direction: column;
   padding: 16px;
   flex: 1;
+  position: relative;
 }
 
 /* Description container: limit height to ~3 lines, hide overflow */
 .description-container {
   position: relative;
   overflow: hidden;
-  max-height: 4.3em; /* ~3 lines */
+  max-height: 4.4em; /* ~3 lines */
   transition: max-height 0.3s ease;
   margin-bottom: 8px;
 }
@@ -63,7 +64,7 @@
   max-height: none;
 }
 
-/* Expand button: circular, centered below description */
+/* Expand button: align at bottom of card-body, centered horizontally */
 .expand-btn {
   background-color: #ccc;
   border: none;
@@ -73,7 +74,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0.5rem auto 0;
+  margin-top: auto; /* push to bottom */
+  align-self: center; /* center horizontally */
   color: #555;
   cursor: pointer;
 }

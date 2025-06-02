@@ -12,6 +12,7 @@ export function createCard(repo) {
   spinner.setAttribute('role', 'status');
   spinner.innerHTML = `<span class="visually-hidden">Cargando imagen…</span>`;
   imgWrapper.appendChild(spinner);
+
   const img = document.createElement('img');
   img.className = 'card-img-top d-none';
   img.alt = repo.name;
@@ -93,6 +94,10 @@ export function renderCarousel(repos) {
 
   document.querySelectorAll('[data-bs-toggle="tooltip"]')
       .forEach(el => new bootstrap.Tooltip(el));
+
+  updateExpandButtons();
+  updateCarouselIndicator();
+  updateControlsVisibility();
 }
 
 export function updateExpandButtons() {
@@ -137,5 +142,33 @@ export function updateCarouselIndicator() {
   const total = items.length;
   const activeItem = document.querySelector('#repoCarousel .carousel-item.active');
   const index = items.indexOf(activeItem) + 1;
+
   document.getElementById('carouselIndicator').textContent = `${index}/${total}`;
+  updateControlsVisibility();
+}
+
+export function updateControlsVisibility() {
+  const items = Array.from(document.querySelectorAll('#repoCarousel .carousel-item'));
+  const total = items.length;
+  const activeItem = document.querySelector('#repoCarousel .carousel-item.active');
+  const index = items.indexOf(activeItem) + 1;
+
+  const prevBtn = document.querySelector('#repoCarousel .carousel-control-prev');
+  const nextBtn = document.querySelector('#repoCarousel .carousel-control-next');
+
+  if (index <= 1) {
+    prevBtn.classList.add('d-none');
+    prevBtn.classList.remove('d-md-flex');
+  } else {
+    prevBtn.classList.remove('d-none');
+    prevBtn.classList.add('d-md-flex');
+  }
+
+  if (index >= total) {
+    nextBtn.classList.add('d-none');
+    nextBtn.classList.remove('d-md-flex');
+  } else {
+    nextBtn.classList.remove('d-none');
+    nextBtn.classList.add('d-md-flex');
+  }
 }
